@@ -7,15 +7,9 @@ namespace WebApplication1.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Base : ControllerBase
+    public class Base(IUnitOfWork unitOfWork, IMapper mapper) : ControllerBase
     {
-        protected readonly IUnitOfWork unitOfWork;
-        protected readonly IMapper mapper;
-
-        public Base(IUnitOfWork unitOfWork, IMapper mapper)
-        {
-            this.unitOfWork = unitOfWork;
-            this.mapper = mapper;
-        }
+        protected readonly IUnitOfWork unitOfWork = unitOfWork;
+        protected readonly IMapper mapper = mapper;
     }
 }

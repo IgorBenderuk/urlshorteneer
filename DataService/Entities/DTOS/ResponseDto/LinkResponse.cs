@@ -14,6 +14,5 @@ namespace DataService.Entities.DTOS.ResponseDto
 
         public string ShortedUrl { get; set; } = string.Empty;
 
-        public string CreatedBy {  get; set; } = string.Empty;  
     }
 }

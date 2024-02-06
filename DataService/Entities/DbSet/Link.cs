@@ -1,18 +1,20 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Net.WebRequestMethods;
 
 namespace DataService.Entities.DbSet
 {
     public class Link
     {
-        public Guid Id { get; set; } = new Guid();
+        public Guid Id { get; set; } 
 
         public string LongUrl { get; set; } = string.Empty;
 
-        public string ShortedUrl { get; set; } =string.Empty;
+        public string ShortedUrl { get; set; } = string.Empty;
 
         public Guid UserId { get; set; }
 
@@ -22,6 +24,7 @@ namespace DataService.Entities.DbSet
 
         public DateTime UpdationDate { get; set; } = DateTime.UtcNow;
 
-    }
 
+    }
+   
 }

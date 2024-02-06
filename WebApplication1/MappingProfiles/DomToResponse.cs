@@ -10,7 +10,8 @@ namespace WebApplication1.MappingProfiles
         {
 
             CreateMap<Link, LinkResponse>()
-                .ForMember(link => link.CreatedBy, opt => opt.MapFrom(src => $"{src.User.FirstName}{src.User.LastName}"));
+                .ForMember(l => l.ShortedUrl, opt => opt.MapFrom(src => $"https://localhost:7218/{src.ShortedUrl}"));
+                
 
             CreateMap<User, UserResponse>()
                 .ForMember(user=>user.Role,opt=>opt.MapFrom(src=>src.Role.ToString()) );

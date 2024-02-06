@@ -89,46 +89,15 @@ namespace DataService.Repos
 
 
         public async Task<Link?> GetUrlByShorten(string shortUrl){
-            var url = $"https://localhost:7218/{shortUrl}";
-
-          return  await dbSet.FirstOrDefaultAsync(l => l.ShortedUrl == url);
+            var link=await dbSet.FirstOrDefaultAsync(l=>l.ShortedUrl == shortUrl );
+            return link;
         }
 
-        private  string  GenerateUniqueKey()
+        public async Task<bool> LinkExis(Link link)
         {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            Random random = new Random();
-            string key = new string(Enumerable.Repeat(chars, 8).Select(s => s[random.Next(s.Length)]).ToArray());
-            return key;
+            return await dbSet.AnyAsync(l => l.LongUrl == link.LongUrl);
         }
 
-        public override async Task<bool> Create(Link entity)
-        {
-             try
-             {
-
-                var isNewLink = await dbSet.AnyAsync(link => link.LongUrl == entity.LongUrl);
-                if (isNewLink)
-                    return false;
-                
-                var sUrl = $"https://localhost:7218/{GenerateUniqueKey()}";
-                var newLink = new Link()
-                {
-                    LongUrl = entity.LongUrl,
-                    ShortedUrl = sUrl,
-                    UserId = entity.UserId,
-                };
-
-                await dbSet.AddAsync(newLink);
-
-                return true;
-             }
-             catch (Exception ex)
-             {
-                logger.LogError(ex, $"Error Occurs in LinkRepo while processing Create method of {typeof(Link)} entity");
-                throw;
-             }
-        }
 
 
     }
